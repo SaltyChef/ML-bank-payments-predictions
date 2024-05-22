@@ -31,18 +31,23 @@ Throughout this work, fundamental aspects of building and evaluating predictive 
 
 ## 4. Discussion
 
-### 4.1 Classifier Performance
+Taking into account our initial objective of assisting the bank in identifying cases where individuals will not be able to pay the loan next month (class 0), it is crucial to place greater importance on classifiers that demonstrate higher specificity since the bank will want to guard against cases where a person cannot pay the loan but is marked as able to pay. However, other metrics associated with each classifier should not be disregarded.
 
-The SVM models, including SVM with Gridsearch and Gridsearch with Kruskal, showed results similar to the SVM Default across all evaluated metrics, suggesting that parameter tuning did not significantly impact the model's performance.
+In terms of accuracy, the SVM Default classifier stands out as the best, with a rate of 82.32%, while the Gaussian Naive Bayes shows significantly inferior performance, with only 56.7%. This discrepancy can be attributed to the simplistic nature of the naive Bayes model, which assumes independence between variables, which may not be the case in our dataset.
 
-The Adaboost classifier stood out in specificity (95.8%), effective in identifying default cases, but exhibited low sensitivity (34%).
+Analyzing specificity, KNN with K=31 emerges as the best classifier, achieving an impressive rate of 97.69%. On the other hand, the Gaussian Naive Bayes again shows not very optimal performance, with a specificity of only 52.67%.
 
-### 4.2 Dataset Balancing
+Regarding precision, Fisher LDA stands out as the best classifier, with a rate of 71.67%, while Gaussian Naive Bayes continues to perform unsatisfactorily, with only 29.61%. This disparity can be attributed to the tendency of the Naive Bayes model to underestimate the probability of certain classes, resulting in low precision.
 
-During the project, it was identified that there was an imbalance in the dataset, with more cases of customers who can pay the loan next month. To address this, balancing methods could be used such as:
+Finally, in terms of sensitivity, Gaussian Naive Bayes presents itself as the best classifier, with a rate of 71.1%, while KNN with K=31 shows a sensitivity of only 9.87%. A possible explanation for this result is the ability of Naive Bayes to better handle unbalanced datasets, as is the case here, where class 0 is predominant.
 
-- **Under-sampling:** Randomly reducing the size of the larger class.
-- **Over-sampling:** Increasing the sample size of the smaller class using techniques like repetition, bootstrapping, or SMOTE (Synthetic Minority Over-Sampling Technique).
+Besides the results of the classifiers mentioned earlier, it is essential to highlight the performance of other developed classifiers. The different SVM models, including SVM with Gridsearch and Gridsearch with Kruskal, showed results quite similar to SVM Default in all evaluated metrics. The reason could be that the adjustments in the SVM parameters did not have a significant impact on the model's performance.
+
+On the other hand, the Adaboost classifier stood out with a specificity of 95.8%, making it particularly effective in identifying cases where individuals will not be able to pay the loan next month, thus minimizing false positives. However, it is important to note that Adaboost demonstrated a relatively low sensitivity of 34%, meaning it may not be as effective in capturing all positive cases, resulting in a higher rate of false negatives.
+
+It is also of great relevance to note that throughout the project, the group failed to balance the dataset, as there are more cases where the client can pay the loan next month. 
+
+For this balancing, under-sampling could be done by randomly reducing the size of the larger class, testing with various balanced datasets to find the best one that shows better results during the experiments. The same could be done for over-sampling, which is used when the amount of data in one of the classes is insufficient. Here the method tries to balance the dataset by increasing the sample size using repetition, bootstrapping, or SMOTE (Synthetic Minority Over-Sampling Technique).
 
 ## 5. Conclusion
 
